@@ -66,8 +66,8 @@ def contrast_different_curves(data_path, background_data_path, pic_path, selecte
             for j in range(len(species2)):
                 if species2[j] == species1[i]:
                     count += 1
-                    plt.plot(temperatures1, densities1[i], label = species1[i], color = colors[i])
-                    plt.plot(temperatures1, densities2[j], linestyle = "--", color = colors[i])
+                    plt.plot(temperatures1, densities1[i], label = species1[i], color = colors[count - 1])
+                    plt.plot(temperatures1, densities2[j], linestyle = "--", color = colors[count - 1])
                 
         if count > 1:
             plt.title('Densities vs. Temperature')
@@ -83,14 +83,15 @@ def contrast_different_curves(data_path, background_data_path, pic_path, selecte
             assert species in species1, "Unknown species selected!"
             assert species in species2, "Unknown species selected!"
         count = 0
+        colors = plt.cm.viridis(numpy.linspace(0, 1, len(set(species1) & set(species2))))
         for species in selected_species:
             for i in range(len(species1)):
                 if species1[i] == species:
                     for j in range(len(species2)):
                         if species2[j] == species:
                             count += 1
-                            plt.plot(temperatures1, densities1[i], label = species1[i], color = colors[i])
-                            plt.plot(temperatures1, densities2[j], linestyle = "--", color = colors[i])
+                            plt.plot(temperatures1, densities1[i], label = species1[i], color = colors[count - 1])
+                            plt.plot(temperatures1, densities2[j], linestyle = "--", color = colors[count - 1])
         if count > 1:
             plt.title('Densities vs. Temperature')
         else:
